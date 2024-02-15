@@ -1,0 +1,2 @@
+{"naziv":"Jedan","opis":"ff","kategorija":"1","cena":"99"}
+{"naziv":"Dva","opis":"f","kategorija":"1","cena":"99"}

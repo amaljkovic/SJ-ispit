@@ -1,0 +1,16 @@
+body{
+     background-color: #fde4e4; 
+     background-image: url("resources/images/bg2.jpg");
+}
+
+main.container{ 
+background-color:#dbeff9; 
+box-shadow: 0px 0px 12px grey; 
+border:1px solid black; 
+margin-top:20px; 
+}
+
+
+.error{ border-color:red; }
+
+.success{ border-color:green; }
