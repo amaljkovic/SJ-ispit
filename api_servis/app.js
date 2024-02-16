@@ -1,4 +1,6 @@
 const express = require('express');
+const { sequelize, Jelo, Kategorija, JeloSastojak, Sastojak, StavkaNarudzbine, Narudzbina } = require("../models");
+
 
 const app = express();
 
@@ -15,4 +17,10 @@ app.use("/jelo", narudzbinaRoutes);
 const sastojakRoutes = require("./routes/sastojak.js");
 app.use("/sastojak", sastojakRoutes);
 
-app.listen(9000);
+// app.listen(9000);
+app.listen(9000, async () => {
+	console.log("Started server on localhost:9000");
+	await sequelize.sync();
+	console.log("DB synced");
+});
+

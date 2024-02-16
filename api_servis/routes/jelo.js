@@ -1,4 +1,6 @@
 const express = require("express");
+const { sequelize, Jelo, Kategorija, JeloSastojak, Sastojak, StavkaNarudzbine} = require("../../models");
+
 const route = express.Router();
 
 route.use(express.json());
@@ -6,8 +8,10 @@ route.use(express.urlencoded({extended:true}));
 
 route.get("/", async (req, res) => {
     try{
-         return res.json("sva jela");
-    }catch(err){
+          const jela = await Jelo.findAll();
+          return res.json(jela);
+         }
+     catch(err){    
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });
     }
