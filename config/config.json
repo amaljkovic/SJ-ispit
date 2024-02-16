@@ -4,7 +4,10 @@
     "password": null,
     "database": "skript_j",
     "host": "127.0.0.1",
-    "dialect": "mariadb"
+    "dialect": "mariadb",
+    "define": {
+      "freezeTableName": true
+    }
   },
   "test": {
     "username": "root",

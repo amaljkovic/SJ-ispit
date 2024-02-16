@@ -4,5 +4,15 @@
     "mariadb": "^3.2.3",
     "sequelize": "^6.37.0",
     "sequelize-cli": "^6.6.2"
-  }
+  },
+  "name": "sj-ispit",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }
