@@ -8,7 +8,9 @@ route.use(express.urlencoded({extended:true}));
 
 route.get("/", async (req, res) => {
     try{
-         return res.json("svi sastojci");
+     const sastojci = await Sastojak.findAll();
+     return res.json(sastojci);
+
     }catch(err){
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });
@@ -17,7 +19,8 @@ route.get("/", async (req, res) => {
 
  route.get("/:id", async (req, res) => {
     try{
-         return res.json("sastojak čiji je id=" + req.params.id);
+     const sastojak = await Sastojak.findByPk(req.params.id);
+     return res.json(sastojak);
     }catch(err){
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });
@@ -27,7 +30,8 @@ route.get("/", async (req, res) => {
  
  route.post("/", async (req, res) => {
     try{
-         return res.json("unos novog sastojka čiji su podaci u req.body");
+     const novi = await Sastojak.create(req.body);
+     return res.json(novi);
     }catch(err){
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });
@@ -37,7 +41,9 @@ route.get("/", async (req, res) => {
  
  route.put("/:id", async (req, res) => {
     try{
-         return res.json("izmena podataka sastojka čiji je id="+req.params.id+" a podaci su u req.body");
+     const sastojak = await Sastojak.findByPk(req.params.id);
+     sastojak.naziv = req.body.naziv;
+     sastojak.save();
     }catch(err){
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });
@@ -47,7 +53,8 @@ route.get("/", async (req, res) => {
  
  route.delete("/:id", async (req, res) => {
     try{
-         return res.json(req.params.id);  //id obrisanog
+     const sastojak = await Sastojak.findByPk(req.params.id);
+     sastojak.destroy();
     }catch(err){
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });

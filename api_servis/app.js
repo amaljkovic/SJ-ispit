@@ -13,9 +13,10 @@ app.use("/jelo", jeloRoutes);
 const kategorijaRoutes = require("./routes/kategorija.js");
 app.use("/kategorija", kategorijaRoutes);
 const narudzbinaRoutes = require("./routes/narudzbina.js");
-app.use("/jelo", narudzbinaRoutes);
+app.use("/narudzbina", narudzbinaRoutes); //TODO: da li ovde treba da bude narudzbina? -> menjala sam ponovo je bio error 
 const sastojakRoutes = require("./routes/sastojak.js");
 app.use("/sastojak", sastojakRoutes);
+
 
 // app.listen(9000);
 app.listen(9000, async () => {

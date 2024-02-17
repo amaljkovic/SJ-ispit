@@ -8,7 +8,8 @@ route.use(express.urlencoded({extended:true}));
 
 route.get("/", async (req, res) => {
     try{
-         return res.json("sve narudzbine");
+     const narudzbine = await StavkaNarudzbine.findAll();
+     return res.json(narudzbine);
     }catch(err){
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });
@@ -17,7 +18,8 @@ route.get("/", async (req, res) => {
 
  route.get("/:id", async (req, res) => {
     try{
-         return res.json("narudzbina čiji je id=" + req.params.id);
+     const narudzbina = await StavkaNarudzbine.findByPk(req.params.id);
+     return res.json(narudzbina);
     }catch(err){
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });
@@ -27,7 +29,8 @@ route.get("/", async (req, res) => {
  
  route.post("/", async (req, res) => {
     try{
-         return res.json("unos nove narudzbine čiji su podaci u req.body");
+     const novi = await StavkaNarudzbine.create(req.body);
+     return res.json(novi);
     }catch(err){
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });
@@ -37,7 +40,9 @@ route.get("/", async (req, res) => {
  
  route.put("/:id", async (req, res) => {
     try{
-         return res.json("izmena podataka narudzbine čiji je id="+req.params.id+" a podaci su u req.body");
+     const narudzbina = await StavkaNarudzbine.findByPk(req.params.id);
+     narudzbina.status = req.body.status;
+     narudzbina.save();
     }catch(err){
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });
@@ -47,7 +52,9 @@ route.get("/", async (req, res) => {
  
  route.delete("/:id", async (req, res) => {
     try{
-         return res.json(req.params.id);  //id obrisanog
+     const narudzbina = await StavkaNarudzbine.findByPk(req.params.id);
+     narudzbina.destroy();
+     return res.json( jelo.id );
     }catch(err){
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });

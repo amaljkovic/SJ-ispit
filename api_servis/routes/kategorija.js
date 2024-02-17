@@ -8,8 +8,9 @@ route.use(express.urlencoded({extended:true}));
 
 route.get("/", async (req, res) => {
     try{
-         return res.json("sve kategorije");
-    }catch(err){
+          const kategorije = await Kategorija.findAll();
+          return res.json(kategorije);    
+         }catch(err){
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });
     }
@@ -17,8 +18,8 @@ route.get("/", async (req, res) => {
 
  route.get("/:id", async (req, res) => {
     try{
-         return res.json("kategorija čiji je id=" + req.params.id);
-    }catch(err){
+          const kategorija = await Kategorija.findByPk(req.params.id);
+          return res.json(kategorija);    }catch(err){
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });
     }
@@ -27,8 +28,9 @@ route.get("/", async (req, res) => {
  
  route.post("/", async (req, res) => {
     try{
-         return res.json("unos nove kategorije čiji su podaci u req.body");
-    }catch(err){
+          const novi = await Kategorija.create(req.body);
+          return res.json(novi);    
+     }catch(err){
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });
     }
@@ -37,8 +39,12 @@ route.get("/", async (req, res) => {
  
  route.put("/:id", async (req, res) => {
     try{
-         return res.json("izmena podataka kategorije čiji je id="+req.params.id+" a podaci su u req.body");
-    }catch(err){
+          const kategorija = await Kategorija.findByPk(req.params.id);
+          kategorija.naziv = req.body.naziv;
+         
+          kategorija.save();
+          return res.json(kategorija);    
+     }catch(err){
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });
     }
@@ -47,7 +53,9 @@ route.get("/", async (req, res) => {
  
  route.delete("/:id", async (req, res) => {
     try{
-         return res.json(req.params.id);  //id obrisanog
+     const kategorija = await Kategorija.findByPk(req.params.id);
+     kategorija.destroy();
+     return res.json( kategorija.id );
     }catch(err){
          console.log(err);
          res.status(500).json({ error: "Greska", data: err });
